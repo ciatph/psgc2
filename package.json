@@ -26,5 +26,8 @@
   "devDependencies": {
     "case": "^1.5.5",
     "xlsx": "^0.12.13"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }
