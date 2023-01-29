@@ -37,9 +37,23 @@ const main = async () => {
 
 
   try {
+    // Create a data directory
+    if (!fs.existsSync(DATA_DIR_PATH)) {
+      fs.mkdirSync(DATA_DIR_PATH)
+    }
+
+    // Download the PSGC Publication Excel file
+    try {
+      await downloadExcel({
+        url: process.env.PSGC_EXCEL_FILE_URL,
+        pathToFile: EXCEL_FILE_PATH
+      })
+    } catch (err) {
+      throw new Error(err.message)
+    }
 
     console.log('Reading workbook..');
-    const workbook = xlsx.readFile('./src/PSGC Publication Mar2018.xlsx');
+    const workbook = xlsx.readFile(EXCEL_FILE_PATH);
 
     console.log('Reading worksheet..');
     const worksheet = workbook.Sheets['PSGC'];
@@ -228,14 +242,16 @@ const main = async () => {
       }
       i++;
     }
-    fs.writeFile('./tree.json', JSON.stringify(tree), 'utf8', () => console.log('tree.json saved.'));
-    fs.writeFile('./raw.json', JSON.stringify(raw), 'utf8', () => console.log('raw.json saved.'));
-    fs.writeFile('./regions.json', JSON.stringify(regions), 'utf8', () => console.log('regions.json saved.'));
-    fs.writeFile('./provinces.json', JSON.stringify(provinces), 'utf8', () => console.log('provinces.json saved.'));
-    fs.writeFile('./cities.json', JSON.stringify(cities), 'utf8', () => console.log('cities.json saved.'));
-    fs.writeFile('./municipalities.json', JSON.stringify(municipalities), 'utf8', () => console.log('municipalities.json saved.'));
+    fs.writeFile(FILE_PATHS.TREE, JSON.stringify(tree), 'utf8', () => console.log('tree.json saved.'))
+    fs.writeFile(FILE_PATHS.RAW, JSON.stringify(raw), 'utf8', () => console.log('raw.json saved.'))
+    fs.writeFile(FILE_PATHS.REGIONS, JSON.stringify(regions), 'utf8', () => console.log('regions.json saved.'))
+    fs.writeFile(FILE_PATHS.PROVINCES, JSON.stringify(provinces), 'utf8', () => console.log('provinces.json saved.'))
+    fs.writeFile(FILE_PATHS.CITIES, JSON.stringify(cities), 'utf8', () => console.log('cities.json saved.'))
+    fs.writeFile(FILE_PATHS.MUNICIPALITIES, JSON.stringify(municipalities), 'utf8', () => console.log('municipalities.json saved.'))
   } catch (e) {
     console.log(String(e));
     console.log(e);
   }
 }
+
+main()
