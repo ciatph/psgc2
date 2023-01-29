@@ -37,5 +37,6 @@ jobs:
             data/provinces.json
             data/cities.json
             data/municipalities.json
+            data/publication.xlsx
           retention-days: 1
 
