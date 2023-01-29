@@ -1,0 +1,42 @@
+name: Download and Build Data
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  lint-app:
+    name: Download and Build
+    runs-on: ubuntu-latest
+    env:
+      PSGC_EXCEL_FILE_URL: ${{ secrets.PSGC_EXCEL_FILE_URL }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Use NodeJS v16.14.2
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.2
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build data
+        run: |
+          yarn build
+          ls -l -a
+          cd data
+          ls -l -a
+      - name: Archive Development Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: data
+          path: |
+            data/tree.json
+            data/raw.json
+            data/regions.json
+            data/provinces.json
+            data/cities.json
+            data/municipalities.json
+            data/publication.xlsx
+          retention-days: 1
+
