@@ -1,3 +1,6 @@
+const fs = require('fs')
+const https = require('https')
+
 const downloadExcel = async (pathToFile) => {
   try {
     const file = fs.createWriteStream(pathToFile)
