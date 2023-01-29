@@ -1,0 +1,25 @@
+name: Download and Build Data
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  lint-app:
+    name: Lint App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Use NodeJS v16.14.2
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.2
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build data
+        run: |
+          yarn build
+          ls -l -a
+
