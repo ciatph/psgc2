@@ -174,9 +174,9 @@ const main = async () => {
             population
           }
           if (notes) data = { ...data, notes }
-           = tree[CURRENT[CONSTS.Reg]]
-          if (CURRENT[CONSTS.Prov] !== undefined) path = path[CURRENT[CONSTS.Prov]]
-          path [CURRENT[CONSTS.City]] = data
+          var pathNode = tree[CURRENT[CONSTS.Reg]]
+          if (CURRENT[CONSTS.Prov] !== undefined) pathNode = pathNode[CURRENT[CONSTS.Prov]]
+          pathNode [CURRENT[CONSTS.City]] = data
 
           var city = {
             name, population,
@@ -197,9 +197,9 @@ const main = async () => {
             population
           }
           if (notes) data = { ...data, notes }
-          var path = tree[CURRENT[CONSTS.Reg]]
-          if (CURRENT[CONSTS.Prov] !== undefined) path = path[CURRENT[CONSTS.Prov]]
-          path [CURRENT[CONSTS.Mun]] = data
+          var pathNode = tree[CURRENT[CONSTS.Reg]]
+          if (CURRENT[CONSTS.Prov] !== undefined) pathNode = pathNode[CURRENT[CONSTS.Prov]]
+          pathNode [CURRENT[CONSTS.Mun]] = data
 
 
           var municipality = {
@@ -222,13 +222,13 @@ const main = async () => {
             population
           }
           if (notes) data = { ...data, notes }
-          var path = tree[CURRENT[CONSTS.Reg]]
-          if (CURRENT[CONSTS.Prov] !== undefined) path = path[CURRENT[CONSTS.Prov]]
-          if (CURRENT[CONSTS.City] !== undefined) path = path[CURRENT[CONSTS.City]]
-          if (CURRENT[CONSTS.Mun] !== undefined) path = path[CURRENT[CONSTS.Mun]]
+          var pathNode = tree[CURRENT[CONSTS.Reg]]
+          if (CURRENT[CONSTS.Prov] !== undefined) pathNode = pathNode[CURRENT[CONSTS.Prov]]
+          if (CURRENT[CONSTS.City] !== undefined) pathNode = pathNode[CURRENT[CONSTS.City]]
+          if (CURRENT[CONSTS.Mun] !== undefined) pathNode = pathNode[CURRENT[CONSTS.Mun]]
           if (CURRENT[CONSTS.Dist] !== undefined) data = { ...data, district: CURRENT[CONSTS.Dist] }
           if (CURRENT[CONSTS.SubMun] !== undefined) data = { ...data, subMunicipality: CURRENT[CONSTS.SubMun] }
-          path [CURRENT[CONSTS.Bgy]] = data
+          pathNode [CURRENT[CONSTS.Bgy]] = data
           break
         default:
           console.log('Empty row skipped:', i)
