@@ -1,6 +1,8 @@
+require('dotenv').config()
 const fs = require('fs');
 const xlsx = require('xlsx');
 const Case = require('case');
+const downloadExcel = require('./download')
 const {
   DATA_DIR_PATH,
   EXCEL_FILE_PATH,
