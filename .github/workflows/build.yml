@@ -24,4 +24,18 @@ jobs:
         run: |
           yarn build
           ls -l -a
+          cd data
+          ls -l -a
+      - name: Archive Development Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: data
+          path: |
+            data/tree.json
+            data/raw.json
+            data/regions.json
+            data/provinces.json
+            data/cities.json
+            data/municipalities.json
+          retention-days: 1
 

@@ -33,7 +33,14 @@ const INTER_LEVELS = {
 }
 
 const main = async () => {
-  const dataFilePath = path.join(__dirname, 'publication.xlsx')
+  // Create a data directory
+  const dataDir = path.join(__dirname, 'data')
+
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir)
+  }
+
+  const dataFilePath = path.join(__dirname, 'data', 'publication.xlsx')
 
   // Download the PSGC Publication Excel file
   try {
@@ -232,17 +239,29 @@ const main = async () => {
           break
         default:
           console.log('Empty row skipped:', i)
-          console.log(row)
+          // TO-DO: Restore console.log later
+          // console.log(row)
           break
       }
       i++
     }
-    fs.writeFile('./tree.json', JSON.stringify(tree), 'utf8', () => console.log('tree.json saved.'))
-    fs.writeFile('./raw.json', JSON.stringify(raw), 'utf8', () => console.log('raw.json saved.'))
-    fs.writeFile('./regions.json', JSON.stringify(regions), 'utf8', () => console.log('regions.json saved.'))
-    fs.writeFile('./provinces.json', JSON.stringify(provinces), 'utf8', () => console.log('provinces.json saved.'))
-    fs.writeFile('./cities.json', JSON.stringify(cities), 'utf8', () => console.log('cities.json saved.'))
-    fs.writeFile('./municipalities.json', JSON.stringify(municipalities), 'utf8', () => console.log('municipalities.json saved.'))
+
+    // Write files to the /data directory
+    const FILE_PATHS = {
+      TREE: path.join(__dirname, 'data', 'tree.json'),
+      RAW: path.join(__dirname, 'data', 'raw.json'),
+      REGIONS: path.join(__dirname, 'data', 'regions.json'),
+      PROVINCES: path.join(__dirname, 'data', 'provinces.json'),
+      CITIES: path.join(__dirname, 'data', 'cities.json'),
+      MUNICIPALITIES: path.join(__dirname, 'data', 'municipalities.json')
+    }
+
+    fs.writeFile(FILE_PATHS.TREE, JSON.stringify(tree), 'utf8', () => console.log('tree.json saved.'))
+    fs.writeFile(FILE_PATHS.RAW, JSON.stringify(raw), 'utf8', () => console.log('raw.json saved.'))
+    fs.writeFile(FILE_PATHS.REGIONS, JSON.stringify(regions), 'utf8', () => console.log('regions.json saved.'))
+    fs.writeFile(FILE_PATHS.PROVINCES, JSON.stringify(provinces), 'utf8', () => console.log('provinces.json saved.'))
+    fs.writeFile(FILE_PATHS.CITIES, JSON.stringify(cities), 'utf8', () => console.log('cities.json saved.'))
+    fs.writeFile(FILE_PATHS.MUNICIPALITIES, JSON.stringify(municipalities), 'utf8', () => console.log('municipalities.json saved.'))
   } catch (e) {
     console.log(String(e))
     console.log(e)
