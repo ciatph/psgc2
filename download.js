@@ -1,12 +1,12 @@
 const fs = require('fs')
 const https = require('https')
 
-const downloadExcel = async (pathToFile) => {
+const downloadExcel = async ({ url, pathToFile }) => {
   try {
     const file = fs.createWriteStream(pathToFile)
 
     return new Promise((resolve, reject) => {
-      https.get(this.#url, (res) => {
+      https.get(url, (res) => {
         res.pipe(file)
 
         file.on('finish', () => {

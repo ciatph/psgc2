@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint-app:
-    name: Lint App
+    name: Download and Build
     runs-on: ubuntu-latest
     env:
       PSGC_EXCEL_FILE_URL: ${{ secrets.PSGC_EXCEL_FILE_URL }}
