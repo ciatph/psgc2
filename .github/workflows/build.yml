@@ -9,6 +9,8 @@ jobs:
   lint-app:
     name: Lint App
     runs-on: ubuntu-latest
+    env:
+      PSGC_EXCEL_FILE_URL: ${{ secrets.PSGC_EXCEL_FILE_URL }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3

@@ -1,6 +1,9 @@
+require('dotenv').config()
 const fs = require('fs');
+const path = require('path')
 const xlsx = require('xlsx');
 const Case = require('case');
+const downloadExcel = require('./download')
 
 const CONSTS = {
   CC: 'CC',
@@ -29,11 +32,22 @@ const INTER_LEVELS = {
   [CONSTS.SubMun]  : 'Sub-municipality'
 };
 
+const dataFilePath = path.join(__dirname, 'publication.xlsx')
+
+// Download the PSGC Publication Excel file
+try {
+  await downloadExcel({
+    url: process.env.PSGC_EXCEL_FILE_URL,
+    pathToFile: dataFilePath
+  })
+} catch (err) {
+  throw new Error(err.message)
+}
 
 try {
 
   console.log('Reading workbook..');
-  const workbook = xlsx.readFile('./src/PSGC Publication Mar2018.xlsx');
+  const workbook = xlsx.readFile(dataFilePath);
 
   console.log('Reading worksheet..');
   const worksheet = workbook.Sheets['PSGC'];

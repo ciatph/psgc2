@@ -1,4 +1,10 @@
 # psgc2
+
+This repository is a fork from @xemasiv's https://github.com/xemasiv/psgc2 repository.<br>
+This fork aims to test and run the existing codes on a scheduled basis and upload relevant data to Firebase Storage for reference.
+
+---
+
 Official Philippine Standard Geographic Code (PSGC) in json formats.
 
 Contains all the latest regions, provinces, cities, municipalities and barangays.
